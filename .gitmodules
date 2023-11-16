@@ -1,0 +1,6 @@
+[submodule "fairs-api"]
+	path = fairs-api
+    url = https://github.com/rockenchanter/fairs-api.git
+[submodule "fairs-front"]
+	path = fairs-front
+	url = https://github.com/rockenchanter/fairs-front.git

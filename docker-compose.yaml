@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  backend:
+    container_name: backend
+    build: ./fairs-api
+    depends_on:
+      - db
+    env_file: .env
+    networks:
+      - back
+    volumes:
+      - ./fairs-api/src:/code/src
+      - ./assets:/code/assets
+  db:
+    image: postgres:alpine
+    env_file: .env
+    networks:
+      - back
+  web:
+    image: nginx:alpine
+    depends_on:
+      - backend
+    volumes:
+      - ./fairs-front/dist:/usr/share/nginx/html
+      - ./assets:/usr/share/nginx/html/assets
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    networks:
+      - back
+
+networks:
+  back:
